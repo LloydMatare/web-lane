@@ -151,17 +151,19 @@ const PageFrame = ({
                   open={showColorScheme}
                   onOpenChange={setShowColorScheme}
                 >
-                  <PopoverTrigger asChild>
-                    <Button
-                      size="icon"
-                      variant="ghost"
-                      className="p-1! hover:bg-accent
+                  <PopoverTrigger
+                    render={
+                      <Button
+                        size="icon"
+                        variant="ghost"
+                        className="p-1! hover:bg-accent
                      size-6! cursor-pointer
                     "
-                    >
-                      <PaintbrushIcon className="size-3.5" />
-                    </Button>
-                  </PopoverTrigger>
+                      >
+                        <PaintbrushIcon className="size-3.5" />
+                      </Button>
+                    }
+                  />
                   <PopoverContent
                     align="start"
                     className="w-52 p-3"

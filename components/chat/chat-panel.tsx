@@ -57,58 +57,56 @@ const ChatPanel = ({
               (part) => part.type === "file"
             )
             return (
-              <>
-                <Message from={message.role} key={message.id}>
-                  <MessageContent className="text-[14.5px]">
-                    {attachmentsFromMessage.length > 0 && (
-                      <Attachments variant="grid">
-                        {attachmentsFromMessage.map((part, i) => {
-                          const id = `${message.id}-file-${i}`
-                          const attachmentData = { ...part, id }
-                          return (
-                            <Attachment
-                              data={attachmentData}
-                              key={id}
-                              className="size-20 border-primary/10"
-                            >
-                              <AttachmentPreview />
-                            </Attachment>
-                          )
-                        })}
-                      </Attachments>
-                    )}
+              <Message from={message.role} key={message.id}>
+                <MessageContent className="text-[14.5px]">
+                  {attachmentsFromMessage.length > 0 && (
+                    <Attachments variant="grid">
+                      {attachmentsFromMessage.map((part, i) => {
+                        const id = `${message.id}-file-${i}`
+                        const attachmentData = { ...part, id }
+                        return (
+                          <Attachment
+                            data={attachmentData}
+                            key={id}
+                            className="size-20 border-primary/10"
+                          >
+                            <AttachmentPreview />
+                          </Attachment>
+                        )
+                      })}
+                    </Attachments>
+                  )}
 
-                    {message.parts.map((part, i) => {
-                      switch (part.type) {
-                        case "text":
-                          return (
-                            <div
-                              key={`${message.id}-text-${i}`}
-                              className="flex items-start gap-2">
-                              <MessageResponse>
-                                {part.text}
-                              </MessageResponse>
-                            </div>
-                          )
-                        case "data-generation":
-                          const data = (part as any).data;
-                          return (
-                            <GenerationCard
-                              key={`${message.id}-gen-${i}`}
-                              status={data.status}
-                              pages={data.pages}
-                              currentPageId={data.currentPageId}
-                              regeneratePage={data.regeneratePage}
-                            />
-                          )
+                  {message.parts.map((part, i) => {
+                    switch (part.type) {
+                      case "text":
+                        return (
+                          <div
+                            key={`${message.id}-text-${i}`}
+                            className="flex items-start gap-2">
+                            <MessageResponse>
+                              {part.text}
+                            </MessageResponse>
+                          </div>
+                        )
+                      case "data-generation":
+                        const data = (part as any).data;
+                        return (
+                          <GenerationCard
+                            key={`${message.id}-gen-${i}`}
+                            status={data.status}
+                            pages={data.pages}
+                            currentPageId={data.currentPageId}
+                            regeneratePage={data.regeneratePage}
+                          />
+                        )
 
-                        default:
-                          return null;
-                      }
-                    })}
-                  </MessageContent>
-                </Message>
-              </>
+                      default:
+                        return null;
+                    }
+                  })}
+                </MessageContent>
+              </Message>
             )
           })}
 
